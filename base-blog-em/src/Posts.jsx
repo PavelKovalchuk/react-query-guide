@@ -14,7 +14,6 @@ export function Posts() {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  // replace with useQuery
   const { data, isError, error, isLoading } = useQuery('posts', fetchPosts, { staleTime: 2000 });
 
   if (isLoading) {
