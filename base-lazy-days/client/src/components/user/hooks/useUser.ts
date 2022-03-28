@@ -57,7 +57,7 @@ export function useUser(): UseUser {
     queryClient.setQueryData(queryKeys.user, null);
 
     // remove user appointments in react query cache
-    queryClient.removeQueries('user-appointments');
+    queryClient.removeQueries([queryKeys.appointments, queryKeys.user]);
   }
 
   return { user, updateUser, clearUser };
