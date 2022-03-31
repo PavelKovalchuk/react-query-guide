@@ -18,19 +18,23 @@ function queryErrorHandler(error: unknown): void {
   toast({ id, title, status: 'error', variant: 'subtle', isClosable: true });
 }
 
+export function generateQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        onError: queryErrorHandler,
+        staleTime: 600000, // 10 minutes
+        cacheTime: 900000, // 15 minutes
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      },
+      mutations: {
+        onError: queryErrorHandler,
+      },
+    },
+  });
+}
+
 // to satisfy typescript until this file has uncommented contents
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      onError: queryErrorHandler,
-      staleTime: 600000, // 10 minutes
-      cacheTime: 900000, // 15 minutes
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    },
-    mutations: {
-      onError: queryErrorHandler,
-    },
-  },
-});
+export const queryClient = generateQueryClient();
